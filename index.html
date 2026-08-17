@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sano Bot - Tu Asistente de Bienestar</title>
+    <meta name="description" content="Un bot de conversación interactivo y rastreador de hábitos para ayudarte a vivir una vida más saludable y balanceada.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Principal -->
+        <header class="app-header">
+            <div class="logo-area">
+                <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-.778.099-1.533.284-2.253" />
+                </svg>
+                <div class="header-text">
+                    <h1>Sano Bot</h1>
+                    <p class="subtitle">Tu asistente inteligente de bienestar y hábitos saludables</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon" aria-label="Cambiar tema">
+                    <svg id="theme-icon-light" class="theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                    </svg>
+                    <svg id="theme-icon-dark" class="theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenedor Principal en Grid -->
+        <div class="main-layout">
+            
+            <!-- SECCIÓN DEL CHATBOT -->
+            <main class="chat-section">
+                <div class="card chat-card">
+                    <!-- Cabecera del Chat -->
+                    <div class="chat-header">
+                        <div class="bot-avatar">
+                            <span class="pulse-indicator"></span>
+                            <span class="avatar-emoji">🌱</span>
+                        </div>
+                        <div class="chat-status">
+                            <h3>Sano Bot</h3>
+                            <span class="status-text">En línea y listo para ayudarte</span>
+                        </div>
+                    </div>
+
+                    <!-- Mensajes de Chat -->
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- El primer mensaje se inyectará dinámicamente o estará aquí como bienvenida -->
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                ¡Hola! Soy <strong>Sano Bot</strong>, tu asistente de bienestar. 🌿 Estoy aquí para ayudarte a hidratarte mejor, relajarte con ejercicios de respiración, darte consejos sobre alimentación y recomendarte actividades saludables. 
+                                <br><br>
+                                ¿Qué te gustaría hacer hoy? Puedes escribir directamente o usar los botones de atajo de abajo.
+                            </div>
+                            <span class="message-time">Ahora</span>
+                        </div>
+                    </div>
+
+                    <!-- Sugerencias de Respuesta rápida -->
+                    <div class="chat-suggestions">
+                        <button class="suggestion-btn" data-intent="agua">💧 Control de Agua</button>
+                        <button class="suggestion-btn" data-intent="respiracion">🧘 Respiración Guiada</button>
+                        <button class="suggestion-btn" data-intent="ejercicio">💪 Actividad Física</button>
+                        <button class="suggestion-btn" data-intent="nutricion">🍎 Nutrición Sana</button>
+                        <button class="suggestion-btn" data-intent="sueño">😴 Mejorar Sueño</button>
+                    </div>
+
+                    <!-- Formulario de Entrada de Texto -->
+                    <form class="chat-input-form" id="chat-form">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            placeholder="Pregúntame algo sobre bienestar..." 
+                            required 
+                            autocomplete="off"
+                            maxlength="200"
+                        >
+                        <button type="submit" class="btn-send" aria-label="Enviar mensaje">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="send-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </main>
+
+            <!-- PANEL DE WIDGETS -->
+            <aside class="widgets-section">
+                <!-- Widget 1: Water Tracker -->
+                <div class="card widget-card water-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon-bg water-icon">
+                            💧
+                        </div>
+                        <div class="widget-title">
+                            <h3>Rastreador de Hidratación</h3>
+                            <p>Meta diaria recomendada: 2.0 Litros (2000 ml)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-content">
+                        <!-- Visualizador del vaso/progreso -->
+                        <div class="water-visual">
+                            <div class="water-glass">
+                                <div class="water-fill" id="water-fill" style="height: 0%;"></div>
+                                <span class="water-percentage" id="water-pct">0%</span>
+                            </div>
+                            <div class="water-stats">
+                                <span class="current-value" id="water-current">0 ml</span>
+                                <span class="separator">/</span>
+                                <span class="goal-value">2000 ml</span>
+                            </div>
+                        </div>
+
+                        <!-- Barra de progreso lineal alternativa -->
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="water-progress-bar" style="width: 0%;"></div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="water-controls">
+                            <button class="btn btn-secondary btn-water" data-amount="250">
+                                <span>+250 ml</span>
+                                <small>Vaso Chico</small>
+                            </button>
+                            <button class="btn btn-secondary btn-water" data-amount="500">
+                                <span>+500 ml</span>
+                                <small>Vaso Grande</small>
+                            </button>
+                            <button class="btn btn-outline" id="reset-water" title="Reiniciar agua de hoy">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-sm">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget 2: Breathing Exercise -->
+                <div class="card widget-card breathing-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon-bg breathing-icon">
+                            🧘
+                        </div>
+                        <div class="widget-title">
+                            <h3>Respiración Consciente</h3>
+                            <p>Relaja tu mente y reduce el estrés</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-content breathing-body">
+                        <!-- El círculo de respiración que se agranda/achica -->
+                        <div class="breathing-circle-container">
+                            <div class="breathing-ring"></div>
+                            <div class="breathing-circle" id="breathing-circle">
+                                <span class="breathing-instruction" id="breathing-instruction">Listo</span>
+                            </div>
+                        </div>
+
+                        <div class="breathing-controls">
+                            <p class="breathing-timer-info" id="breathing-timer-info">Técnica Box Breathing: 4s inhalar, 4s retener, 4s exhalar, 4s esperar.</p>
+                            <button class="btn btn-primary" id="btn-breathing-toggle">Comenzar Respiración</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget 3: Inspiración de la Mente (Jiddu Krishnamurti) -->
+                <div class="card widget-card quote-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon-bg quote-icon">
+                            ✨
+                        </div>
+                        <div class="widget-title">
+                            <h3>Inspiración Mental</h3>
+                            <p>Filosofía y autoconocimiento</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-content quote-body">
+                        <div class="author-profile">
+                            <img src="krishnamurti.png" alt="Jiddu Krishnamurti" class="author-img">
+                            <div class="author-info">
+                                <h4 class="author-name">J. Krishnamurti</h4>
+                                <span class="author-title">Filósofo y escritor</span>
+                            </div>
+                        </div>
+                        <blockquote class="quote-text">
+                            <p id="quote-display">"La capacidad de observar sin evaluar es la forma más alta de inteligencia."</p>
+                        </blockquote>
+                        <button class="btn btn-secondary btn-quote" id="btn-next-quote">
+                            Nueva Reflexión
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Hecho con amor para tu salud • Sano Bot © 2026</p>
+        </footer>
+    </div>
+
+    <!-- Script de aplicación -->
+    <script src="app.js"></script>
+</body>
+</html>
