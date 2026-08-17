@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sendBotResponse(responseText);
         });
     // ----------------------------------------------------------------------
-    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO (v1.05)
+    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO (v1.03)
     // ----------------------------------------------------------------------
     const frasesKrishnamurti = [
       "La capacidad de observar sin evaluar es la forma más alta de inteligencia.",
