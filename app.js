@@ -364,109 +364,88 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------------------------
     // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO
     // ----------------------------------------------------------------------
-    const KRISHNAMURTI_QUOTES = [
-        "La capacidad de observar sin evaluar es la forma más alta de inteligencia.",
-        "No es saludable estar bien adaptado a una sociedad profundamente enferma.",
-        "La libertad es esencial para el amor; no la libertad de la revuelta, sino la libertad de comprender.",
-        "En uno mismo reside el mundo entero y, si sabes cómo mirar y aprender, la puerta está ahí y la llave está en tu mano.",
-        "El amor no es el fin del pensamiento; el amor es cuando el pensamiento ya no es.",
-        "Solo cuando la mente está libre de ideas y creencias puede actuar correctamente.",
-        "Adquirir conocimientos es una forma de imitación; descubrir la verdad es un acto de creación.",
-        "La verdad es una tierra sin caminos. El hombre no puede llegar a ella a través de ninguna organización, de ningún credo.",
-        "El miedo corrompe la mente y destruye la sensibilidad; una mente libre de miedo es capaz de una gran compasión.",
-        "Vivir en el presente es el milagro más grande; la mente siempre trata de escapar hacia el pasado o el futuro.",
-        "El fin del dolor es el comienzo de la sabiduría. Comprenderse a uno mismo es el inicio de la paz interior."
+    const frasesKrishnamurti = [
+      "La capacidad de observar sin evaluar es la forma más alta de inteligencia.",
+      "No es saludable estar bien adaptado a una sociedad profundamente enferma.",
+      "La verdad es una tierra sin caminos.",
+      "Solo cuando la mente está en silencio absoluto puede percibir lo real.",
+      "La libertad no es una reacción; la libertad no es una elección.",
+      "El miedo siempre surge en relación con el pensamiento.",
+      "En uno mismo reside el mundo entero; comprende tu mente y comprenderás el mundo.",
+      "Comprenderse a uno mismo es el principio de la sabiduría.",
+      "La atención pura no tiene centro, ni motivos, ni dirección.",
+      "Vivir en el presente es morir al pasado instante tras instante."
     ];
 
-    const quoteDisplay = document.getElementById('quote-display');
-    const btnNextQuote = document.getElementById('btn-next-quote');
+    const modalKrishnamurti = document.getElementById('modal-krishnamurti');
+    const textoFrase = document.getElementById('texto-frase-krishnamurti');
+    const btnKrishnamurti = document.getElementById('btn-krishnamurti');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+    const btnCerrarModalX = document.getElementById('btn-cerrar-modal-x');
+    const btnOtraFrase = document.getElementById('btn-otra-frase');
 
-    function getRandomQuote() {
-        const randomIndex = Math.floor(Math.random() * KRISHNAMURTI_QUOTES.length);
-        return KRISHNAMURTI_QUOTES[randomIndex];
+    function mostrarFraseRandom() {
+        if (!textoFrase) return;
+        
+        let newQuote = "";
+        const currentText = textoFrase.textContent.replace(/^"|"$/g, ''); // Limpiar comillas
+        
+        // Elegir una frase aleatoria que no sea igual a la actual
+        do {
+            const randomIndex = Math.floor(Math.random() * frasesKrishnamurti.length);
+            newQuote = frasesKrishnamurti[randomIndex];
+        } while (newQuote === currentText);
+
+        // Animación suave de opacidad al cambiar de texto
+        textoFrase.style.opacity = '0';
+        setTimeout(() => {
+            textoFrase.textContent = `"${newQuote}"`;
+            textoFrase.style.opacity = '1';
+        }, 150);
     }
 
-    // Cambiar frase del widget lateral al hacer clic
-    if (btnNextQuote && quoteDisplay) {
-        quoteDisplay.textContent = `"${getRandomQuote()}"`;
-
-        btnNextQuote.addEventListener('click', () => {
-            let newQuote = getRandomQuote();
-            while (`"${newQuote}"` === quoteDisplay.textContent) {
-                newQuote = getRandomQuote();
-            }
-            quoteDisplay.style.opacity = '0';
-            setTimeout(() => {
-                quoteDisplay.textContent = `"${newQuote}"`;
-                quoteDisplay.style.opacity = '1';
-            }, 150);
+    // Abrir el modal
+    if (btnKrishnamurti && modalKrishnamurti) {
+        btnKrishnamurti.addEventListener('click', () => {
+            modalKrishnamurti.style.display = 'flex';
+            mostrarFraseRandom();
         });
     }
 
-    // --- LÓGICA DEL MODAL DE KRISHNAMURTI ---
-    const krishnamurtiModal = document.getElementById('krishnamurti-modal');
-    const btnHeaderQuote = document.getElementById('btn-krishnamurti');
-    const modalCloseBtn = document.getElementById('modal-close');
-    const btnModalNextQuote = document.getElementById('btn-modal-next-quote');
-    const modalQuoteDisplay = document.getElementById('modal-quote-display');
-
-    function openModal() {
-        if (!krishnamurtiModal) return;
-        
-        // Poner frase inicial en el modal
-        if (modalQuoteDisplay) {
-            modalQuoteDisplay.textContent = `"${getRandomQuote()}"`;
+    // Cerrar el modal
+    function ocultarModal() {
+        if (modalKrishnamurti) {
+            modalKrishnamurti.style.display = 'none';
         }
-        
-        krishnamurtiModal.classList.add('active');
-        krishnamurtiModal.setAttribute('aria-hidden', 'false');
     }
 
-    function closeModal() {
-        if (!krishnamurtiModal) return;
-        krishnamurtiModal.classList.remove('active');
-        krishnamurtiModal.setAttribute('aria-hidden', 'true');
+    if (btnCerrarModal) {
+        btnCerrarModal.addEventListener('click', ocultarModal);
+    }
+    
+    if (btnCerrarModalX) {
+        btnCerrarModalX.addEventListener('click', ocultarModal);
     }
 
-    // Eventos del modal
-    if (btnHeaderQuote) {
-        btnHeaderQuote.addEventListener('click', openModal);
-    }
-
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeModal);
-    }
-
-    // Cerrar al hacer clic en el fondo translúcido (overlay)
-    if (krishnamurtiModal) {
-        krishnamurtiModal.addEventListener('click', (e) => {
-            if (e.target === krishnamurtiModal) {
-                closeModal();
+    // Cerrar al hacer clic en el backdrop de fondo
+    if (modalKrishnamurti) {
+        modalKrishnamurti.addEventListener('click', (e) => {
+            if (e.target === modalKrishnamurti) {
+                ocultarModal();
             }
         });
     }
 
-    // Cerrar al presionar la tecla Escape
+    // Cerrar con tecla Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && krishnamurtiModal && krishnamurtiModal.classList.contains('active')) {
-            closeModal();
+        if (e.key === 'Escape' && modalKrishnamurti && modalKrishnamurti.style.display === 'flex') {
+            ocultarModal();
         }
     });
 
     // Cambiar frase dentro del modal
-    if (btnModalNextQuote && modalQuoteDisplay) {
-        btnModalNextQuote.addEventListener('click', () => {
-            let newQuote = getRandomQuote();
-            while (`"${newQuote}"` === modalQuoteDisplay.textContent) {
-                newQuote = getRandomQuote();
-            }
-            
-            modalQuoteDisplay.style.opacity = '0';
-            setTimeout(() => {
-                modalQuoteDisplay.textContent = `"${newQuote}"`;
-                modalQuoteDisplay.style.opacity = '1';
-            }, 150);
-        });
+    if (btnOtraFrase) {
+        btnOtraFrase.addEventListener('click', mostrarFraseRandom);
     }
     });
 });
