@@ -73,6 +73,11 @@ body.dark {
     padding: 0;
 }
 
+body, html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: var(--font-family);
     background-color: var(--bg-primary);
@@ -853,5 +858,45 @@ body.dark .water-glass::before {
     padding: 4px 10px;
     font-size: 0.75rem;
   }
+}
+
+/* 9. Fix de Layout Mobile y Modal de Jiddu Krishnamurti */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 12px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .main-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .chat-card {
+    height: 520px !important;
+  }
+}
+
+/* Forzar estilos del Modal de Krishnamurti */
+#modal-krishnamurti {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  display: none;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+}
+
+#modal-krishnamurti > div {
+  width: 100% !important;
+  max-width: 360px !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  box-sizing: border-box !important;
 }
 
