@@ -823,147 +823,35 @@ body.dark .water-glass::before {
     transform: translateY(-1px);
 }
 
-/* 8. Estilos del Nuevo Modal Flotante de Krishnamurti Aislado */
-.krishnamurti-modal-overlay {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background: rgba(0, 0, 0, 0.65) !important;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999999 !important;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.krishnamurti-modal-overlay.active {
-  display: flex !important;
-}
-
-.krishnamurti-modal-card {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 16px;
-  padding: 24px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: relative;
-  box-sizing: border-box;
-}
-
-/* Compatibilidad con Dark Mode */
-body.dark .krishnamurti-modal-card {
-  background: #0d1e16;
-  border-color: #225e41;
-}
-
-.krishnamurti-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #16a34a;
-  margin: 0 auto 10px;
-  display: block;
-}
-
-.krishnamurti-author {
-  margin: 4px 0 2px;
-  font-size: 1.15rem;
-  color: #14532d;
-  font-weight: bold;
-}
-
-body.dark .krishnamurti-author {
-  color: #e2f5eb;
-}
-
-.krishnamurti-subtitle {
-  margin: 0 0 12px;
-  font-size: 0.8rem;
-  color: #4b5563;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-body.dark .krishnamurti-subtitle {
-  color: #80b097;
-}
-
-.krishnamurti-quote {
-  font-style: italic;
-  color: #1f2937;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  margin: 12px 0 18px;
-  min-height: 50px;
-  transition: opacity 0.15s ease-in-out;
-}
-
-body.dark .krishnamurti-quote {
-  color: #e2f5eb;
-}
-
-.krishnamurti-btn-close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #6b7280;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.krishnamurti-btn-close:hover {
-  color: #16a34a;
-}
-
-.krishnamurti-btn-action {
-  background: #16a34a;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 0.9rem;
+/* 8. Estilos del Botón de Cabecera para Krishnamurti */
+.btn-krishnamurti-header {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: var(--font-family);
   font-weight: 600;
+  font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
 }
 
-.krishnamurti-btn-action:hover {
-  background: #15803d;
+.btn-krishnamurti-header:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
-  .btn-header-quote {
+  .btn-krishnamurti-header {
     padding: 4px 10px;
     font-size: 0.75rem;
-  }
-  
-  #modal-krishnamurti .modal-content,
-  #modal-krishnamurti .krishnamurti-modal-card {
-    width: 95%;
-    max-height: 80vh; /* Que no se salga de la pantalla */
-    overflow-y: auto; /* Scroll si el texto es largo */
-    padding: 15px;
-  }
-  
-  #modal-krishnamurti {
-    align-items: center; /* Asegura centrado vertical */
-  }
-  
-  .krishnamurti-quote {
-    font-size: 0.85rem; /* Reducir un poco el tamaño de la frase en mobile */
-    margin: 10px 0 14px;
   }
 }
 

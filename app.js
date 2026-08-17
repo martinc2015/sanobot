@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sendBotResponse(responseText);
         });
     // ----------------------------------------------------------------------
-    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO
+    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO (v1.02)
     // ----------------------------------------------------------------------
     const frasesKrishnamurti = [
       "La capacidad de observar sin evaluar es la forma más alta de inteligencia.",
@@ -377,70 +377,59 @@ document.addEventListener('DOMContentLoaded', () => {
       "Vivir en el presente es morir al pasado instante tras instante."
     ];
 
+    let fraseActual = -1;
     const modalKrishnamurti = document.getElementById('modal-krishnamurti');
     const textoFrase = document.getElementById('texto-frase-krishnamurti');
     const btnKrishnamurti = document.getElementById('btn-krishnamurti');
     const btnCerrarKrishnamurti = document.getElementById('btn-cerrar-krishnamurti');
     const btnOtraFrase = document.getElementById('btn-otra-frase');
 
-    function mostrarFraseRandom() {
+    function actualizarFrase() {
         if (!textoFrase) return;
         
-        let newQuote = "";
-        const currentText = textoFrase.textContent.replace(/^"|"$/g, ''); // Limpiar comillas
-        
-        // Elegir una frase aleatoria que no sea igual a la actual
+        let nuevoIndice = -1;
         do {
-            const randomIndex = Math.floor(Math.random() * frasesKrishnamurti.length);
-            newQuote = frasesKrishnamurti[randomIndex];
-        } while (newQuote === currentText);
-
-        // Animación suave de opacidad al cambiar de texto
-        textoFrase.style.opacity = '0';
-        setTimeout(() => {
-            textoFrase.textContent = `"${newQuote}"`;
-            textoFrase.style.opacity = '1';
-        }, 150);
+            nuevoIndice = Math.floor(Math.random() * frasesKrishnamurti.length);
+        } while (nuevoIndice === fraseActual);
+        
+        fraseActual = nuevoIndice;
+        textoFrase.innerText = `"${frasesKrishnamurti[fraseActual]}"`;
     }
 
-    // Abrir el modal agregando la clase 'active'
+    // Click en #btn-krishnamurti: modal.style.display = 'flex'; actualizarFrase();
     if (btnKrishnamurti && modalKrishnamurti) {
         btnKrishnamurti.addEventListener('click', () => {
-            modalKrishnamurti.classList.add('active');
-            mostrarFraseRandom();
+            modalKrishnamurti.style.display = 'flex';
+            actualizarFrase();
         });
     }
 
-    // Cerrar el modal removiendo la clase 'active'
-    function ocultarModal() {
-        if (modalKrishnamurti) {
-            modalKrishnamurti.classList.remove('active');
-        }
+    // Click en #btn-cerrar-krishnamurti: modal.style.display = 'none';
+    if (btnCerrarKrishnamurti && modalKrishnamurti) {
+        btnCerrarKrishnamurti.addEventListener('click', () => {
+            modalKrishnamurti.style.display = 'none';
+        });
     }
 
-    if (btnCerrarKrishnamurti) {
-        btnCerrarKrishnamurti.addEventListener('click', ocultarModal);
-    }
-
-    // Cerrar al hacer clic en el backdrop de fondo (fuera de la tarjeta)
+    // Click en #modal-krishnamurti (si target === modal): modal.style.display = 'none';
     if (modalKrishnamurti) {
         modalKrishnamurti.addEventListener('click', (e) => {
             if (e.target === modalKrishnamurti) {
-                ocultarModal();
+                modalKrishnamurti.style.display = 'none';
             }
         });
     }
 
-    // Cerrar con tecla Escape
+    // Click en #btn-otra-frase: actualizarFrase();
+    if (btnOtraFrase) {
+        btnOtraFrase.addEventListener('click', actualizarFrase);
+    }
+
+    // Tecla Escape para cerrar (UX extra)
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalKrishnamurti && modalKrishnamurti.classList.contains('active')) {
-            ocultarModal();
+        if (e.key === 'Escape' && modalKrishnamurti && modalKrishnamurti.style.display === 'flex') {
+            modalKrishnamurti.style.display = 'none';
         }
     });
-
-    // Cambiar frase dentro del modal
-    if (btnOtraFrase) {
-        btnOtraFrase.addEventListener('click', mostrarFraseRandom);
-    }
     });
 });
