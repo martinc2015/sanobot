@@ -944,5 +944,19 @@ body.dark .modal-title-new {
         padding: 4px 10px;
         font-size: 0.75rem;
     }
+    #modal-krishnamurti .modal-content {
+        width: 95%;
+        max-height: 80vh; /* Que no se salga de la pantalla */
+        overflow-y: auto; /* Scroll si el texto es largo */
+        padding: 15px;
+    }
+    #modal-krishnamurti {
+        align-items: center; /* Asegura centrado vertical */
+        justify-content: center;
+    }
+    .modal-quote-new {
+        font-size: 0.9rem; /* Reducir un poco el tamaño de la frase en mobile */
+        margin: 12px 0;
+    }
 }
 
