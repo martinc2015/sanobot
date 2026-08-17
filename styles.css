@@ -823,140 +823,147 @@ body.dark .water-glass::before {
     transform: translateY(-1px);
 }
 
-/* 8. Estilos del Nuevo Modal Flotante de Krishnamurti */
-.modal-overlay-new {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* Backdrop translúcido oscuro */
-    backdrop-filter: blur(4px);
-    display: none; /* Oculto por defecto, se activa a flex en JS */
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+/* 8. Estilos del Nuevo Modal Flotante de Krishnamurti Aislado */
+.krishnamurti-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.65) !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999 !important;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
-/* Card modal con estética verde suave */
-.modal-card-new {
-    background: #e8f5e9;
-    max-width: 420px;
-    width: 90%;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    text-align: center;
-    position: relative;
-    border: 1px solid #74c69d;
-    animation: modal-scale-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.krishnamurti-modal-overlay.active {
+  display: flex !important;
 }
 
-body.dark .modal-card-new {
-    background: #0d1e16; /* Fondo verde oscuro para tema oscuro */
-    border-color: #225e41;
+.krishnamurti-modal-card {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
 }
 
-@keyframes modal-scale-up {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+/* Compatibilidad con Dark Mode */
+body.dark .krishnamurti-modal-card {
+  background: #0d1e16;
+  border-color: #225e41;
 }
 
-/* Botón X de cerrar en la esquina superior derecha */
-.modal-x-btn {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    line-height: 1;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: color var(--transition-fast);
+.krishnamurti-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #16a34a;
+  margin: 0 auto 10px;
+  display: block;
 }
 
-.modal-x-btn:hover {
-    color: var(--color-primary);
+.krishnamurti-author {
+  margin: 4px 0 2px;
+  font-size: 1.15rem;
+  color: #14532d;
+  font-weight: bold;
 }
 
-/* Foto circular pequeña */
-.modal-photo-new {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #2e7d32;
-    margin: 0 auto 12px;
-    display: block;
-    box-shadow: var(--shadow-sm);
+body.dark .krishnamurti-author {
+  color: #e2f5eb;
 }
 
-.modal-title-new {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #1b4332;
-    margin-bottom: 2px;
+.krishnamurti-subtitle {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-body.dark .modal-title-new {
-    color: #e2f5eb;
+body.dark .krishnamurti-subtitle {
+  color: #80b097;
 }
 
-.modal-subtitle-new {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
+.krishnamurti-quote {
+  font-style: italic;
+  color: #1f2937;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 12px 0 18px;
+  min-height: 50px;
+  transition: opacity 0.15s ease-in-out;
 }
 
-/* Cita estilizada */
-.modal-quote-new {
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--color-text-main);
-    line-height: 1.55;
-    margin: 18px 0;
-    padding: 0 8px;
+body.dark .krishnamurti-quote {
+  color: #e2f5eb;
 }
 
-#texto-frase-krishnamurti {
-    transition: opacity 0.15s ease-in-out;
+.krishnamurti-btn-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  line-height: 1;
 }
 
-/* Acciones en el pie del modal */
-.modal-actions-new {
-    display: flex;
-    gap: 12px;
-    width: 100%;
+.krishnamurti-btn-close:hover {
+  color: #16a34a;
 }
 
-.modal-actions-new button {
-    flex: 1;
-    font-size: 0.9rem;
-    padding: 12px;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    font-family: var(--font-family);
-    font-weight: 600;
+.krishnamurti-btn-action {
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.krishnamurti-btn-action:hover {
+  background: #15803d;
 }
 
 @media (max-width: 600px) {
-    .btn-header-quote {
-        padding: 4px 10px;
-        font-size: 0.75rem;
-    }
-    #modal-krishnamurti .modal-content {
-        width: 95%;
-        max-height: 80vh; /* Que no se salga de la pantalla */
-        overflow-y: auto; /* Scroll si el texto es largo */
-        padding: 15px;
-    }
-    #modal-krishnamurti {
-        align-items: center; /* Asegura centrado vertical */
-        justify-content: center;
-    }
-    .modal-quote-new {
-        font-size: 0.9rem; /* Reducir un poco el tamaño de la frase en mobile */
-        margin: 12px 0;
-    }
+  .btn-header-quote {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+  
+  #modal-krishnamurti .modal-content,
+  #modal-krishnamurti .krishnamurti-modal-card {
+    width: 95%;
+    max-height: 80vh; /* Que no se salga de la pantalla */
+    overflow-y: auto; /* Scroll si el texto es largo */
+    padding: 15px;
+  }
+  
+  #modal-krishnamurti {
+    align-items: center; /* Asegura centrado vertical */
+  }
+  
+  .krishnamurti-quote {
+    font-size: 0.85rem; /* Reducir un poco el tamaño de la frase en mobile */
+    margin: 10px 0 14px;
+  }
 }
 

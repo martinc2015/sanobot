@@ -380,8 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalKrishnamurti = document.getElementById('modal-krishnamurti');
     const textoFrase = document.getElementById('texto-frase-krishnamurti');
     const btnKrishnamurti = document.getElementById('btn-krishnamurti');
-    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
-    const btnCerrarModalX = document.getElementById('btn-cerrar-modal-x');
+    const btnCerrarKrishnamurti = document.getElementById('btn-cerrar-krishnamurti');
     const btnOtraFrase = document.getElementById('btn-otra-frase');
 
     function mostrarFraseRandom() {
@@ -404,30 +403,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 150);
     }
 
-    // Abrir el modal
+    // Abrir el modal agregando la clase 'active'
     if (btnKrishnamurti && modalKrishnamurti) {
         btnKrishnamurti.addEventListener('click', () => {
-            modalKrishnamurti.style.display = 'flex';
+            modalKrishnamurti.classList.add('active');
             mostrarFraseRandom();
         });
     }
 
-    // Cerrar el modal
+    // Cerrar el modal removiendo la clase 'active'
     function ocultarModal() {
         if (modalKrishnamurti) {
-            modalKrishnamurti.style.display = 'none';
+            modalKrishnamurti.classList.remove('active');
         }
     }
 
-    if (btnCerrarModal) {
-        btnCerrarModal.addEventListener('click', ocultarModal);
-    }
-    
-    if (btnCerrarModalX) {
-        btnCerrarModalX.addEventListener('click', ocultarModal);
+    if (btnCerrarKrishnamurti) {
+        btnCerrarKrishnamurti.addEventListener('click', ocultarModal);
     }
 
-    // Cerrar al hacer clic en el backdrop de fondo
+    // Cerrar al hacer clic en el backdrop de fondo (fuera de la tarjeta)
     if (modalKrishnamurti) {
         modalKrishnamurti.addEventListener('click', (e) => {
             if (e.target === modalKrishnamurti) {
@@ -438,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cerrar con tecla Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalKrishnamurti && modalKrishnamurti.style.display === 'flex') {
+        if (e.key === 'Escape' && modalKrishnamurti && modalKrishnamurti.classList.contains('active')) {
             ocultarModal();
         }
     });

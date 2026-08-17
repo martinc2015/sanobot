@@ -187,24 +187,19 @@
         </footer>
     </div>
 
-    <!-- Modal de Reflexiones de Jiddu Krishnamurti -->
-    <div id="modal-krishnamurti" class="modal-overlay-new" style="display: none;">
-        <div class="modal-card-new modal-content">
-            <button id="btn-cerrar-modal-x" class="modal-x-btn" aria-label="Cerrar modal">&times;</button>
-            <img src="krishnamurti.png" alt="Jiddu Krishnamurti" class="modal-photo-new">
-            <h3 class="modal-title-new">Jiddu Krishnamurti</h3>
-            <span class="modal-subtitle-new">Filósofo y Orador</span>
-            <blockquote class="modal-quote-new">
-                <p id="texto-frase-krishnamurti">"La capacidad de observar sin evaluar es la forma más alta de inteligencia."</p>
-            </blockquote>
-            <div class="modal-actions-new">
-                <button class="btn btn-primary" id="btn-otra-frase">Otra frase</button>
-                <button class="btn btn-secondary" id="btn-cerrar-modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Script de aplicación -->
     <script src="app.js"></script>
+
+    <!-- Modal de Reflexiones de Jiddu Krishnamurti -->
+    <div id="modal-krishnamurti" class="krishnamurti-modal-overlay">
+      <div class="krishnamurti-modal-card">
+        <button id="btn-cerrar-krishnamurti" class="krishnamurti-btn-close">&times;</button>
+        <img src="krishnamurti.png" alt="Jiddu Krishnamurti" class="krishnamurti-avatar">
+        <h3 class="krishnamurti-author">Jiddu Krishnamurti</h3>
+        <p class="krishnamurti-subtitle">Filósofo y orador</p>
+        <blockquote id="texto-frase-krishnamurti" class="krishnamurti-quote"></blockquote>
+        <button id="btn-otra-frase" class="krishnamurti-btn-action">Otra frase</button>
+      </div>
+    </div>
 </body>
 </html>
