@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sendBotResponse(responseText);
         });
     // ----------------------------------------------------------------------
-    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI
+    // 5. SECCIÓN DE CITAS DE JIDDU KRISHNAMURTI Y MODAL INTERACTIVO
     // ----------------------------------------------------------------------
     const KRISHNAMURTI_QUOTES = [
         "La capacidad de observar sin evaluar es la forma más alta de inteligencia.",
@@ -372,7 +372,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "El amor no es el fin del pensamiento; el amor es cuando el pensamiento ya no es.",
         "Solo cuando la mente está libre de ideas y creencias puede actuar correctamente.",
         "Adquirir conocimientos es una forma de imitación; descubrir la verdad es un acto de creación.",
-        "La verdad es una tierra sin caminos. El hombre no puede llegar a ella a través de ninguna organización, de ningún credo."
+        "La verdad es una tierra sin caminos. El hombre no puede llegar a ella a través de ninguna organización, de ningún credo.",
+        "El miedo corrompe la mente y destruye la sensibilidad; una mente libre de miedo es capaz de una gran compasión.",
+        "Vivir en el presente es el milagro más grande; la mente siempre trata de escapar hacia el pasado o el futuro.",
+        "El fin del dolor es el comienzo de la sabiduría. Comprenderse a uno mismo es el inicio de la paz interior."
     ];
 
     const quoteDisplay = document.getElementById('quote-display');
@@ -383,22 +386,85 @@ document.addEventListener('DOMContentLoaded', () => {
         return KRISHNAMURTI_QUOTES[randomIndex];
     }
 
-    // Cambiar frase al hacer clic
+    // Cambiar frase del widget lateral al hacer clic
     if (btnNextQuote && quoteDisplay) {
-        // Inicializar con frase aleatoria al azar
         quoteDisplay.textContent = `"${getRandomQuote()}"`;
 
         btnNextQuote.addEventListener('click', () => {
             let newQuote = getRandomQuote();
-            // Evitar repetir la misma frase consecutivamente
             while (`"${newQuote}"` === quoteDisplay.textContent) {
                 newQuote = getRandomQuote();
             }
-            // Pequeña animación visual al cambiar
             quoteDisplay.style.opacity = '0';
             setTimeout(() => {
                 quoteDisplay.textContent = `"${newQuote}"`;
                 quoteDisplay.style.opacity = '1';
+            }, 150);
+        });
+    }
+
+    // --- LÓGICA DEL MODAL DE KRISHNAMURTI ---
+    const krishnamurtiModal = document.getElementById('krishnamurti-modal');
+    const btnHeaderQuote = document.getElementById('btn-krishnamurti');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const btnModalNextQuote = document.getElementById('btn-modal-next-quote');
+    const modalQuoteDisplay = document.getElementById('modal-quote-display');
+
+    function openModal() {
+        if (!krishnamurtiModal) return;
+        
+        // Poner frase inicial en el modal
+        if (modalQuoteDisplay) {
+            modalQuoteDisplay.textContent = `"${getRandomQuote()}"`;
+        }
+        
+        krishnamurtiModal.classList.add('active');
+        krishnamurtiModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+        if (!krishnamurtiModal) return;
+        krishnamurtiModal.classList.remove('active');
+        krishnamurtiModal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Eventos del modal
+    if (btnHeaderQuote) {
+        btnHeaderQuote.addEventListener('click', openModal);
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    // Cerrar al hacer clic en el fondo translúcido (overlay)
+    if (krishnamurtiModal) {
+        krishnamurtiModal.addEventListener('click', (e) => {
+            if (e.target === krishnamurtiModal) {
+                closeModal();
+            }
+        });
+    }
+
+    // Cerrar al presionar la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && krishnamurtiModal && krishnamurtiModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Cambiar frase dentro del modal
+    if (btnModalNextQuote && modalQuoteDisplay) {
+        btnModalNextQuote.addEventListener('click', () => {
+            let newQuote = getRandomQuote();
+            while (`"${newQuote}"` === modalQuoteDisplay.textContent) {
+                newQuote = getRandomQuote();
+            }
+            
+            modalQuoteDisplay.style.opacity = '0';
+            setTimeout(() => {
+                modalQuoteDisplay.textContent = `"${newQuote}"`;
+                modalQuoteDisplay.style.opacity = '1';
             }, 150);
         });
     }

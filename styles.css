@@ -867,3 +867,164 @@ body.dark .water-glass::before {
     padding: 10px;
     flex-direction: row !important;
 }
+
+/* ==========================================================================
+   8. ESTILOS DEL BOTÓN DE HEADER Y MODAL DE KRISHNAMURTI
+   ========================================================================== */
+
+.btn-header-quote {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-header-quote:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+/* Capa de fondo del modal (Backdrop) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 37, 25, 0.6); /* Backdrop translúcido verde oscuro */
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Contenedor del Modal */
+.modal-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 480px;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.9);
+    transition: transform var(--transition-normal);
+    overflow: hidden;
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+
+.modal-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+    color: var(--color-primary);
+}
+
+.modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-author-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--bg-secondary);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.modal-author-img {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.modal-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.modal-author-info strong {
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+}
+
+.modal-author-info span {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.modal-quote-text {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--color-text-main);
+    line-height: 1.5;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-accent);
+    margin: 8px 0;
+}
+
+#modal-quote-display {
+    transition: opacity 0.15s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .btn-header-quote {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+}
+
